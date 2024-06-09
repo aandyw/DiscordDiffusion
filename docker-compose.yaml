@@ -1,9 +1,11 @@
 version: '2.24.3'
+
 services:
   flask-app:
     build: ./apps/diffusion
     ports:
       - '8000:8000'
+
   discord-app-server:
     build: ./apps/discord
     ports:

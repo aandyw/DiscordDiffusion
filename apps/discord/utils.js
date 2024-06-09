@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import { verifyKey } from 'discord-interactions';
-import { getFakeUsername } from './game.js';
 
 export function VerifyDiscordRequest(clientKey) {
   return function (req, res, buf) {
@@ -54,62 +53,4 @@ export async function InstallGlobalCommands(appId, commands) {
 
 export function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-export async function getServerLeaderboard(guildId) {
-  let members = await getServerMembers(guildId, 3);
-  members = members
-    .map((id, i) => `${i + 1}. <@${id}> (\`${getFakeUsername(i)}\`)`)
-    .join('\n');
-  return `## :trophy: Server Leaderboard\n*This is a very fake leaderboard that just pulls random server members. Pretend it's pulling real game data and it's much more fun* :zany_face:\n\n### This week\n${members}\n\n### All time\n${members}`;
-}
-
-async function getServerMembers(guildId, limit) {
-  const endpoint = `guilds/${guildId}/members?limit=${limit}`;
-
-  try {
-    const res = await DiscordRequest(endpoint, { method: 'GET' });
-    const parsedRes = await res.json();
-    return parsedRes.map((member) => member.user.id);
-  } catch (err) {
-    return console.error(err);
-  }
-}
-
-export function createPlayerEmbed(profile) {
-  return {
-    type: 'rich',
-    title: `${profile.username} Profile (lvl ${profile.stats.level})`,
-    color: 0x968b9f,
-    fields: [
-      {
-        name: `Account created`,
-        value: profile.createdAt,
-        inline: true,
-      },
-      {
-        name: `Last played`,
-        value: profile.lastPlayed,
-        inline: true,
-      },
-      {
-        name: `Global rank`,
-        value: profile.stats.rank,
-        inline: true,
-      },
-      {
-        name: `Combat stats`,
-        value: `:smiley: ${profile.stats.wins} wins / :pensive: ${profile.stats.losses} losses`,
-      },
-      {
-        name: `Realms explored`,
-        value: profile.stats.realms,
-        inline: true,
-      },
-    ],
-    url: 'https://discord.com/developers/docs/intro',
-    thumbnail: {
-      url: 'https://raw.githubusercontent.com/shaydewael/example-app/main/assets/fake-icon.png',
-    },
-  };
 }
