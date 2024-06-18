@@ -1,0 +1,13 @@
+diffusers
+wandb
+safetensors
+xformers
+bitsandbytes
+accelerate>=0.22.0
+torchvision
+transformers>=4.25.1
+ftfy
+tensorboard
+Jinja2
+datasets
+peft==0.7.0
