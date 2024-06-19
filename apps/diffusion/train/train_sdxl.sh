@@ -3,9 +3,14 @@ export MODEL_NAME="stabilityai/stable-diffusion-xl-base-1.0"
 export VAE_NAME="madebyollin/sdxl-vae-fp16-fix"
 export DATASET_NAME="STUDs/DiscordDiffusion"
 
-huggingface login
+# hugging face and W&B logins
+huggingface-cli login
 wandb login
 
+# set accelerate configurations
+accelerate config default
+
+# lauch 
 accelerate launch train_text_to_image_sdxl.py \
   --pretrained_model_name_or_path=$MODEL_NAME \
   --pretrained_vae_model_name_or_path=$VAE_NAME \
