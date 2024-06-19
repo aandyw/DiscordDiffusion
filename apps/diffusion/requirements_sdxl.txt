@@ -1,9 +1,9 @@
-diffusers
+git+https://github.com/huggingface/diffusers
 wandb
-safetensors
-xformers
 bitsandbytes
+safetensors
 accelerate>=0.22.0
+torch>=1.4
 torchvision
 transformers>=4.25.1
 ftfy
