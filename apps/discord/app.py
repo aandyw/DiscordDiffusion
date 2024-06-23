@@ -1,3 +1,5 @@
+"""Launch script for discord bot"""
+
 import os
 from dotenv import load_dotenv
 
@@ -35,10 +37,10 @@ def sticker(ctx, prompt: str = ""):
         components=[
             ActionRow(
                 components=[
-                    Button(style=ButtonStyles.SECONDARY, label="TL", custom_id=handle_select_TL),
-                    Button(style=ButtonStyles.SECONDARY, label="TR", custom_id=handle_select_TR),
-                    Button(style=ButtonStyles.SECONDARY, label="BL", custom_id=handle_select_BL),
-                    Button(style=ButtonStyles.SECONDARY, label="BR", custom_id=handle_select_BR),
+                    Button(style=ButtonStyles.SECONDARY, label="Q1", custom_id=handle_select_q1),
+                    Button(style=ButtonStyles.SECONDARY, label="Q2", custom_id=handle_select_q2),
+                    Button(style=ButtonStyles.SECONDARY, label="Q3", custom_id=handle_select_q3),
+                    Button(style=ButtonStyles.SECONDARY, label="Q4", custom_id=handle_select_q4),
                     Button(style=ButtonStyles.SECONDARY, label="", emoji={"name": "🔄"}, custom_id=refresh),
                 ]
             )
@@ -53,28 +55,63 @@ def sticker(ctx, prompt: str = ""):
 
 
 @discord.custom_handler()
-def handle_select_TL(ctx):
+def handle_select_q1(ctx):
     print("Selected sticker v1")
 
+    # display selected AI sticker
+    return Message(
+        embed=Embed(
+            description=f"`{ctx.author.display_name}` reacted:",
+            image=embed.Media(url=TEMP_URL, height=1024, width=1024),
+            color=3092790,
+        )
+    )
+
 
 @discord.custom_handler()
-def handle_select_TR(ctx):
+def handle_select_q2(ctx):
     print("Selected sticker v2")
 
+    return Message(
+        embed=Embed(
+            description=f"`{ctx.author.display_name}` reacted:",
+            image=embed.Media(url=TEMP_URL, height=1024, width=1024),
+            color=3092790,
+        )
+    )
+
 
 @discord.custom_handler()
-def handle_select_BL(ctx):
+def handle_select_q3(ctx):
     print("Selected sticker v3")
 
+    return Message(
+        embed=Embed(
+            description=f"`{ctx.author.display_name}` reacted:",
+            image=embed.Media(url=TEMP_URL, height=1024, width=1024),
+            color=3092790,
+        )
+    )
+
 
 @discord.custom_handler()
-def handle_select_BR(ctx):
+def handle_select_q4(ctx):
     print("Selected sticker v4")
+
+    return Message(
+        embed=Embed(
+            description=f"`{ctx.author.display_name}` reacted:",
+            image=embed.Media(url=TEMP_URL, height=1024, width=1024),
+            color=3092790,
+        )
+    )
 
 
 @discord.custom_handler()
 def refresh(ctx):
     print("Refresh")
+
+    return Message("regenerating images")
 
 
 discord.set_route("/interactions")
