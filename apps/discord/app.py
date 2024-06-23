@@ -13,14 +13,9 @@ load_dotenv()
 app = Flask(__name__)
 discord = DiscordInteractions(app)
 
-if os.environ["DISCORD_CLIENT_ID"] and os.environ["DISCORD_PUBLIC_KEY"] and os.environ["DISCORD_CLIENT_SECRET"]:
-    app.config["DISCORD_CLIENT_ID"] = os.environ["DISCORD_CLIENT_ID"]
-    app.config["DISCORD_PUBLIC_KEY"] = os.environ["DISCORD_PUBLIC_KEY"]
-    app.config["DISCORD_CLIENT_SECRET"] = os.environ["DISCORD_CLIENT_SECRET"]
-else:
-    app.config["DISCORD_CLIENT_ID"] = os.getenv("DISCORD_CLIENT_ID")
-    app.config["DISCORD_PUBLIC_KEY"] = os.getenv("DISCORD_PUBLIC_KEY")
-    app.config["DISCORD_CLIENT_SECRET"] = os.getenv("DISCORD_CLIENT_SECRET")
+app.config["DISCORD_CLIENT_ID"] = os.getenv("DISCORD_CLIENT_ID")
+app.config["DISCORD_PUBLIC_KEY"] = os.getenv("DISCORD_PUBLIC_KEY")
+app.config["DISCORD_CLIENT_SECRET"] = os.getenv("DISCORD_CLIENT_SECRET")
 
 discord.update_commands()
 
@@ -120,11 +115,7 @@ def refresh(ctx):
 
 
 discord.set_route("/interactions")
-
-if os.environ["TESTING_GUILD"]:
-    discord.update_commands(guild_id=os.environ["TESTING_GUILD"])
-else:
-    discord.update_commands(guild_id=os.getenv("TESTING_GUILD"))
+discord.update_commands(guild_id=os.getenv("TESTING_GUILD"))
 
 
 if __name__ == "__main__":

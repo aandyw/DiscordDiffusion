@@ -2,10 +2,10 @@
 FROM python:3.9-slim
 
 # Set the working directory in the container
-WORKDIR /app/diffusion
+WORKDIR /
 
 # Copy the current directory contents into the container at /app
-COPY . /app/diffusion/
+COPY . /
 
 # Install git
 RUN apt-get update && apt-get install -y git
@@ -20,4 +20,4 @@ RUN pip install bentoml
 EXPOSE 8000
 
 # Define the command to run the BentoML service
-CMD ["bentoml", "serve", "service:SDXLTurbo"]
+# CMD ["bentoml", "serve", "service:SDXLTurbo"]

@@ -1,3 +1,4 @@
+name: ddiff
 services:
   diffusion:
     build: ./apps/diffusion
@@ -6,6 +7,7 @@ services:
 
   discord-app-server:
     build: ./apps/discord
+    container_name: discord-app-server
     ports:
       - '3000:3000'
     environment:
@@ -13,7 +15,8 @@ services:
       - DISCORD_PUBLIC_KEY=${DISCORD_PUBLIC_KEY}
       - DISCORD_CLIENT_SECRET=${DISCORD_CLIENT_SECRET}
       - TESTING_GUILD=${TESTING_GUILD}
-    command: python app.py
+    networks:
+      - mynet
   
   ngrok:
     image: wernight/ngrok
@@ -21,4 +24,12 @@ services:
       - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
     ports:
       - "4040:4040"
-    command: ngrok http --domain=infinite-ghastly-terrier.ngrok-free.app discord-app-server:3000
+    depends_on:
+      - discord-app-server
+    networks:
+      - mynet
+    command: ["ngrok", "http", "--domain=infinite-ghastly-terrier.ngrok-free.app", "discord-app-server:3000"]
+
+networks:
+  mynet:
+    driver: bridge
