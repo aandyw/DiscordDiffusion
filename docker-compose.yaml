@@ -1,7 +1,5 @@
-version: '2.24.3'
-
 services:
-  flask-app:
+  diffusion:
     build: ./apps/diffusion
     ports:
       - '8000:8000'
@@ -11,9 +9,11 @@ services:
     ports:
       - '3000:3000'
     environment:
-      - APP_ID=${APP_ID}
-      - DISCORD_TOKEN=${DISCORD_TOKEN}
-      - PUBLIC_KEY=${PUBLIC_KEY}
+      - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID}
+      - DISCORD_PUBLIC_KEY=${DISCORD_PUBLIC_KEY}
+      - DISCORD_CLIENT_SECRET=${DISCORD_CLIENT_SECRET}
+      - TESTING_GUILD=${TESTING_GUILD}
+    command: python app.py
   
   ngrok:
     image: wernight/ngrok
@@ -21,4 +21,4 @@ services:
       - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
     ports:
       - "4040:4040"
-    command: ["ngrok", "http", "--domain=lucky-verbally-koala.ngrok-free.app", "discord-app-server:3000"]
+    command: ngrok http --domain=infinite-ghastly-terrier.ngrok-free.app discord-app-server:3000

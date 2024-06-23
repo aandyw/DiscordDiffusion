@@ -11,4 +11,4 @@ Change `.env.public` to `.env` and add your own configs.
 ## Model Training
 
 Dependencies
-`pip install -r requirements_sdxl.txt`
+`pip install -r requirements.txt`
