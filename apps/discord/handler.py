@@ -1,1 +1,1 @@
-"""Handle interactions with SD Model"""
+"""Handle interactions with SD Model."""

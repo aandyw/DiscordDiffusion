@@ -1,4 +1,4 @@
-"""Launch script for discord bot"""
+"""Launch script for discord bot."""
 
 import os
 from dotenv import load_dotenv
