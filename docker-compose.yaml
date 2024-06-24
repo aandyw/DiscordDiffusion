@@ -18,17 +18,17 @@ services:
     networks:
       - mynet
   
-  ngrok:
-    image: wernight/ngrok
-    environment:
-      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
-    ports:
-      - "4040:4040"
-    depends_on:
-      - discord-app-server
-    networks:
-      - mynet
-    command: ["ngrok", "http", "--domain=infinite-ghastly-terrier.ngrok-free.app", "discord-app-server:3000"]
+  # ngrok:
+  #   container_name: ngrok
+  #   image: wernight/ngrok
+  #   environment:
+  #     - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+  #     - NGROK_PORT=discord-app-server:3000
+  #   ports:
+  #     - "0.0.0.0:4040:4040"
+  #   command: ["ngrok", "http", "--domain=infinite-ghastly-terrier.ngrok-free.app", "discord-app-server:3000"]
+  #   networks:
+  #     - mynet
 
 networks:
   mynet:

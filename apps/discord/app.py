@@ -119,4 +119,4 @@ discord.update_commands(guild_id=os.getenv("TESTING_GUILD"))
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=3000)
