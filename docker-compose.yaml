@@ -1,35 +1,19 @@
-name: ddiff
-services:
-  diffusion:
-    build: ./apps/diffusion
-    ports:
-      - '8000:8000'
+version: '2.24.3'
 
+services:
   discord-app-server:
-    build: ./apps/discord
-    container_name: discord-app-server
+    build: ./apps/discord-js
     ports:
       - '3000:3000'
     environment:
-      - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID}
-      - DISCORD_PUBLIC_KEY=${DISCORD_PUBLIC_KEY}
-      - DISCORD_CLIENT_SECRET=${DISCORD_CLIENT_SECRET}
-      - TESTING_GUILD=${TESTING_GUILD}
-    networks:
-      - mynet
+      - APP_ID=${APP_ID}
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - PUBLIC_KEY=${PUBLIC_KEY}
   
-  # ngrok:
-  #   container_name: ngrok
-  #   image: wernight/ngrok
-  #   environment:
-  #     - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
-  #     - NGROK_PORT=discord-app-server:3000
-  #   ports:
-  #     - "4040:4040"
-  #   command: ["ngrok", "http", "--domain=infinite-ghastly-terrier.ngrok-free.app", "discord-app-server:3000"]
-  #   networks:
-  #     - mynet
-
-networks:
-  mynet:
-    driver: bridge
+  ngrok:
+    image: wernight/ngrok
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    ports:
+      - "4040:4040"
+    command: ["ngrok", "http", "--domain=lucky-verbally-koala.ngrok-free.app", "discord-app-server:3000"]
