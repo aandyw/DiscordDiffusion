@@ -1,0 +1,8 @@
+service: "service:SDXLTurbo"
+labels:
+  owner: aandyw
+  project: didiff
+include:
+- "service.py"
+python:
+  requirements_txt: "./requirements.txt"
