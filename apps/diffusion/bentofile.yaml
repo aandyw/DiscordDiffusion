@@ -1,4 +1,4 @@
-service: "service:SDXLTurbo"
+service: "service:SDXLTurbo" # Bento name will be sdxl_turbo
 labels:
   owner: aandyw
   project: didiff
