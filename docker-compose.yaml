@@ -2,7 +2,7 @@ version: '2.24.3'
 
 services:
   discord-app-server:
-    build: ./apps/discord-js
+    build: ./apps/discord
     ports:
       - '3000:3000'
     environment:

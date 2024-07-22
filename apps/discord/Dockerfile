@@ -1,9 +1,15 @@
-FROM python:3.9-slim
+FROM node:20-alpine
 
-WORKDIR /
-COPY . /
+# Create app directory
+WORKDIR /home/app
 
-RUN pip install --no-cache-dir -r requirements.txt
+# Install app dependencies
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
 EXPOSE 3000
 
-CMD ["bash", "-c", "python app.py"]
+CMD ["node", "app.js"]

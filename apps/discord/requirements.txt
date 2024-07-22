@@ -1,2 +1,0 @@
-flask-discord-interactions
-python-dotenv

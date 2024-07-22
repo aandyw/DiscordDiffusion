@@ -1,8 +1,0 @@
-service: "service:SDXLTurbo" # Bento name will be sdxl_turbo
-labels:
-  owner: aandyw
-  project: didiff
-include:
-- "service.py"
-python:
-  requirements_txt: "./requirements.txt"
