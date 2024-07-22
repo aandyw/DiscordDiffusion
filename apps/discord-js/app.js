@@ -119,7 +119,7 @@ app.post('/interactions', async function (req, res) {
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       
     data: {
-      content: 'https://chatx.ai/wp-content/uploads/2023/03/Die-cut_sticker_Cute_kawaii_dinosaur_sticker_white_ba_8429429c-0cfe-492c-8373-6fcbdded.jpg.webp'
+      content: originalImage
     },
    });
   }
