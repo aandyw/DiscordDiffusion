@@ -32,7 +32,7 @@ class SDXLTurbo:
             torch_dtype=torch.float16,
             variant="fp16",
         )
-        self.pipe.to(device="cuda")
+        self.pipe.to(device="mps")
 
     @bentoml.api
     def txt2img(

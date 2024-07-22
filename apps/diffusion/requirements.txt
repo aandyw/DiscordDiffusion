@@ -1,9 +1,8 @@
-python-dotenv
-flask
-flask_cors
 pillow==10.3.0
 git+https://github.com/huggingface/diffusers
-accelerate>=0.22.0
-torch
+bentoml>=1.2.17
+accelerate==0.31.0
+torch==2.3.1
 torchvision
-transformers>=4.25.1
+transformers==4.41.2
+bitsandbytes

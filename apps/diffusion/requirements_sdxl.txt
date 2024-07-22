@@ -1,8 +1,0 @@
-wandb
-bitsandbytes
-safetensors
-ftfy
-tensorboard
-Jinja2
-datasets
-peft==0.7.0
