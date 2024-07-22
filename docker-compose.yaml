@@ -1,24 +1,19 @@
-version: "1"
+version: '2.24.3'
 
 services:
   discord-app-server:
-    network_mode: "host"
-    ipc: host
+    build: ./apps/discord-js
     ports:
       - '3000:3000'
-    image: "ddiff/discord:latest"
-    build:
-      context: ./apps/discord
-      dockerfile: Dockerfile
     environment:
-      APP_ID: ${APP_ID}
-      DISCORD_TOKEN: ${DISCORD_TOKEN}
-      DISCORD_PUBLIC_KEY: ${DISCORD_PUBLIC_KEY}
+      - APP_ID=${APP_ID}
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - PUBLIC_KEY=${PUBLIC_KEY}
   
   ngrok:
     image: wernight/ngrok
     environment:
-      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
     ports:
       - "4040:4040"
     command: ["ngrok", "http", "--domain=lucky-verbally-koala.ngrok-free.app", "discord-app-server:3000"]
