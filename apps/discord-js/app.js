@@ -29,6 +29,7 @@ app.post('/interactions', async function (req, res) {
 
   // Log request bodies
   console.log(req.body);
+  console.log("------------------------------------")
 
   /**
    * Handle slash command requests
@@ -37,18 +38,6 @@ app.post('/interactions', async function (req, res) {
   if (type === InteractionType.APPLICATION_COMMAND) {
     const { name } = data;
       if (name === 'sticker') {
-        const endpoint = 'http://flask-app:8000/inference'
-
-        // const req = await fetch(endpoint, {
-        //   method: 'POST',
-        //   headers: {
-        //    'Content-Type': 'application/json'
-        //   },
-        //   body: JSON.stringify({input: "test"})
-        // })
-
-        // const data = await req.json()
-
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: {
@@ -101,21 +90,24 @@ app.post('/interactions', async function (req, res) {
       }
   }
 
+  
   if (type === InteractionType.MESSAGE_COMPONENT) { 
     const {custom_id} = data
-    const {application_id} = message
+    const {application_id, embeds, channel_id} = message
 
-    // console.log("MESSAGE COMPONENT BUTTON CLICKED")
+    // this is the original image from the embed - we don't need to store! just crop!
+    const originalImage = embeds[0].image.url
+
+
+    /* 
+    Discord Documentation on how to respond to interactions 
+    https://discord.com/developers/docs/interactions/receiving-and-responding#responding-to-an-interaction
+    */
     return res.send({ 
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       
     data: {
-      embeds: [{
-        image: { 
-          url: "https://chatx.ai/wp-content/uploads/2023/03/Die-cut_sticker_Cute_kawaii_dinosaur_sticker_white_ba_8429429c-0cfe-492c-8373-6fcbdded.jpg.webp"
-        },
-        description:`${req.body.member?.user?.global_name} reacted with:`,
-    }],
+      content: 'https://chatx.ai/wp-content/uploads/2023/03/Die-cut_sticker_Cute_kawaii_dinosaur_sticker_white_ba_8429429c-0cfe-492c-8373-6fcbdded.jpg.webp'
     },
    });
   }
