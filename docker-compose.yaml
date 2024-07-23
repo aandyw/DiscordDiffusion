@@ -7,10 +7,10 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
-      DISCORD_PUBLIC_KEY: ${DISCORD_PUBLIC_KEY}
-      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
-      NODE_ENV: ${NODE_ENV:-production} # default NODE_ENV=production 
+      - APP_ID=${APP_ID}
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - PUBLIC_KEY=${PUBLIC_KEY}
+      - NODE_ENV=${NODE_ENV:-production} # default NODE_ENV=production 
 
   ngrok:
     image: wernight/ngrok
