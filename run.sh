@@ -18,7 +18,7 @@ case $environment in
     MY_UID="$(id -u)" MY_GID="$(id -g)" docker compose up discord-app --build
     ;;
   *)
-    echo "Usage: $0 {dev|prod} [docker-compose args]"
+    echo "Usage: $0 {dev|prod}"
     exit 1
     ;;
 esac
