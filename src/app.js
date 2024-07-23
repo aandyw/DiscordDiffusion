@@ -4,7 +4,7 @@ import { InteractionType, InteractionResponseType } from 'discord-interactions';
 import {
   DiscordRequest,
   VerifyDiscordRequest,
-} from './utils.js';
+} from './utils/discord_helpers.js';
 
 // Create an express app
 const app = express();
@@ -102,10 +102,10 @@ app.post('/interactions', async function (req, res) {
     }
   }
 
-  
-  if (type === InteractionType.MESSAGE_COMPONENT) { 
-    const {custom_id} = data
-    const {application_id, embeds, channel_id} = message
+
+  if (type === InteractionType.MESSAGE_COMPONENT) {
+    const { custom_id } = data
+    const { application_id, embeds, channel_id } = message
 
     // this is the original image from the embed - we don't need to store! just crop!
     const originalImage = embeds[0].image.url
@@ -115,13 +115,13 @@ app.post('/interactions', async function (req, res) {
     Discord Documentation on how to respond to interactions 
     https://discord.com/developers/docs/interactions/receiving-and-responding#responding-to-an-interaction
     */
-    return res.send({ 
+    return res.send({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      
-    data: {
-      content: originalImage
-    },
-   });
+
+      data: {
+        content: originalImage
+      },
+    });
   }
 });
 

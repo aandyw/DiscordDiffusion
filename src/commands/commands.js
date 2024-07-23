@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { InstallGlobalCommands } from './utils.js';
+import { InstallGlobalCommands } from '../utils/discord_helpers.js';
 
 const STICKER_COMMAND = {
   name: 'sticker',
@@ -7,8 +7,8 @@ const STICKER_COMMAND = {
   description: 'Generate a sticker using AI!',
   integration_types: [0, 1],
   contexts: [0, 1, 2],
-  options: [ 
-    { 
+  options: [
+    {
       type: 3,
       name: 'prompt',
       description: 'Used for sticker generation',
