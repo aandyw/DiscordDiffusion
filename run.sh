@@ -10,12 +10,12 @@ set +a
 
 case $environment in
   dev)
-    echo "Starting development environment with ngrok..."
-    MY_UID="$(id -u)" MY_GID="$(id -g)" docker compose --profile dev up --build
+    echo "Starting local development environment with ngrok..."
+    MY_UID="$(id -u)" MY_GID="$(id -g)" BUILD_TARGET=development docker compose --profile dev up --build
     ;;
   prod)
-    echo "Starting production environment..."
-    MY_UID="$(id -u)" MY_GID="$(id -g)" docker compose up discord-app --build
+    echo "Building production environment..."
+    MY_UID="$(id -u)" MY_GID="$(id -g)" BUILD_TARGET=production docker compose build discord-app
     ;;
   *)
     echo "Usage: $0 {dev|prod}"
