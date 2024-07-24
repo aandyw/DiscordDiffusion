@@ -4,7 +4,7 @@ import { InstallGlobalCommands } from '../utils/discord_helpers.js';
 const STICKER_COMMAND = {
   name: 'sticker',
   type: 1,
-  description: 'Generate a sticker using AI!',
+  description: 'Generate a sticker!',
   integration_types: [0, 1],
   contexts: [0, 1, 2],
   options: [
