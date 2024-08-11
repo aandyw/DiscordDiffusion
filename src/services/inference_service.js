@@ -1,28 +1,28 @@
-import dotenv from "dotenv";
-import fs from "fs/promises";
-import path from "path";
-import crypto from "crypto";
-import assert from "assert";
+const fs = require("fs/promises");
+const path = require("path");
+const crypto = require("crypto");
+const assert = require("assert");
+const dotenv = require("dotenv");
 
 // Load environment variables
 dotenv.config();
 
-// async function saveBase64Image(base64String, directory = 'temp') {
-//     const base64Data = base64String.replace(/^data:image\/\w+;base64,/, '');
-//     const imageBuffer = Buffer.from(base64Data, 'base64');
-//     const filename = `${crypto.randomBytes(16).toString('hex')}.png`;
+async function saveBase64Image(base64String, directory = 'temp') {
+    const base64Data = base64String.replace(/^data:image\/\w+;base64,/, '');
+    const imageBuffer = Buffer.from(base64Data, 'base64');
+    const filename = `${crypto.randomBytes(16).toString('hex')}.png`;
 
-//     await fs.mkdir(directory, { recursive: true });
+    await fs.mkdir(directory, { recursive: true });
 
-//     const filePath = path.join(directory, filename);
-//     await fs.writeFile(filePath, imageBuffer);
+    const filePath = path.join(directory, filename);
+    await fs.writeFile(filePath, imageBuffer);
 
-//     return filePath;
-// }
+    return filePath;
+}
 
-export async function query(data) {
+async function query(data) {
   try {
-    const response = await fetch(process.env.HUGGINGFACE_ENDPOINT, {
+    const response = await fetch(process.env.HF_ENDPOINT, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${process.env.HF_TOKEN}`,
@@ -57,24 +57,36 @@ export async function query(data) {
   }
 }
 
-// TESTING FUNCTION
+async function test() {
+    const ROW = 2;
+    const COL = 2;
 
-// async function test() {
-//     const ROW = 2
-//     const COL = 2
+    await query({
+        inputs: "disgusted pepe face",
+        num_images: 4,
+        rows: ROW,
+        cols: COL,
+    }).then((response) => {
+        const { images, preview } = response;
 
-//     await query({
-//         inputs: "disgusted pepe face",
-//         num_images: 4,
-//         rows: ROW,
-//         cols: COL,
-//     }).then((response) => {
-//         const { images, preview } = response;
+        images.forEach((img) => { 
+            saveBase64Image(img);
+        });
 
-//         assert(ROW * COL == images.length, "Incorrect number of images returned")
+        saveBase64Image(preview);
 
-//         console.log(`# of images: ${images.length}`);
-//     });
-// }
+        const attachment = new AttachmentBuilder('./services/temp/a9755cb9fef518c27c62f9e8547c9a57.png');
+        console.log(attachment);
+    
+        assert(ROW * COL == images.length, "Incorrect number of images returned");
 
-// test();
+        console.log(`# of images: ${images.length}`);
+    });
+}
+
+// module.exports
+module.exports = {
+  saveBase64Image,
+  query,
+  test,
+};
