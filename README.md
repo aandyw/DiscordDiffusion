@@ -1,6 +1,9 @@
 # DiscordDiffusion
 User Installable Discord Sticker Bot using Diffusion Models
 
+# Demo
+https://github.com/user-attachments/assets/1f608c27-d9ab-4916-b889-46af9c2975ec
+
 # Setup
 ### Discord Setup 
 
@@ -39,10 +42,6 @@ npm run start
 ```
 
 You're now ready to start generating stickers to use in Discord DMs or servers
-
-# Demo
-https://github.com/user-attachments/assets/1f608c27-d9ab-4916-b889-46af9c2975ec
-
 
 
 
