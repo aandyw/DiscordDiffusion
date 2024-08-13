@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./src/index.js",
-    "commands": "node ./src/deploy-commands.js",
+    "register": "node ./src/deploy-commands.js",
     "dev": "nodemon ./src/app.js"
   },
   "dependencies": {
