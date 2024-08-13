@@ -2,7 +2,7 @@
 User Installable Discord Sticker Bot using Diffusion Models
 
 # Demo
-https://github.com/user-attachments/assets/1f608c27-d9ab-4916-b889-46af9c2975ec
+![Demo](docs/demo.gif)
 
 # Setup
 ### Discord Setup 
