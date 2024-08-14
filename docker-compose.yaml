@@ -13,7 +13,8 @@ services:
       PUBLIC_KEY: ${PUBLIC_KEY}
       HF_TOKEN: ${HF_TOKEN}
       HUGGINGFACE_ENDPOINT: ${HUGGINGFACE_ENDPOINT}
-
+    env_file:
+      - .env
 
   ngrok:
     image: wernight/ngrok

@@ -2,19 +2,18 @@
   "name": "ddiff",
   "version": "1.0.0",
   "description": "Send AI stickers in Discord!",
-  "main": "./src/app.js",
+  "main": "./src/index.js",
   "engines": {
     "node": ">=20.x"
   },
   "scripts": {
     "start": "node ./src/index.js",
     "register": "node ./src/deploy-commands.js",
-    "dev": "nodemon ./src/app.js"
+    "dev": "nodemon ./src/index.js"
   },
   "dependencies": {
     "@huggingface/inference": "^2.8.0",
     "axios": "^1.7.3",
-    "discord-interactions": "^3.2.0",
     "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",
     "express": "^4.18.2"

@@ -6,6 +6,9 @@ WORKDIR /home/
 COPY package*.json .
 COPY ./src/ ./src/
 
+# TODO: should not copy over .env
+COPY .env .
+
 EXPOSE 3000
 
 
