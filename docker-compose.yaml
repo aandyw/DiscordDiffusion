@@ -12,7 +12,7 @@ services:
       DISCORD_TOKEN: ${DISCORD_TOKEN}
       PUBLIC_KEY: ${PUBLIC_KEY}
       HF_TOKEN: ${HF_TOKEN}
-      HUGGINGFACE_ENDPOINT: ${HUGGINGFACE_ENDPOINT}
+      HF_ENDPOINT: ${HF_ENDPOINT}
     env_file:
       - .env
 

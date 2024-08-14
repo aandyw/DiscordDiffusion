@@ -59,92 +59,90 @@ module.exports = {
     await interaction.deferReply({ ephemeral: true });
 
     try {
-      while (true) {
-        await query({
-          inputs: interaction.options.getString("prompt"),
-          num_images: 4,
-          rows: 2,
-          cols: 2,
-        }).then((response) => {
-          const { images, preview } = response;
+      await query({
+        inputs: interaction.options.getString("prompt"),
+        num_images: 4,
+        rows: 2,
+        cols: 2,
+      }).then((response) => {
+        const { images, preview } = response;
 
-          previewImage = preview;
-          topLeftImage = images[0];
-          topRightImage = images[1];
-          bottomLeftImage = images[2];
-          bottomRightImage = images[3];
-        });
+        previewImage = preview;
+        topLeftImage = images[0];
+        topRightImage = images[1];
+        bottomLeftImage = images[2];
+        bottomRightImage = images[3];
+      });
 
-        const previewImagePath = await saveBase64Image(previewImage);
-        const reply = await interaction.editReply({
-          files: [new AttachmentBuilder(previewImagePath)],
-          components: [row],
-          ephemeral: true,
-        });
+      const previewImagePath = await saveBase64Image(previewImage);
+      const reply = await interaction.editReply({
+        files: [new AttachmentBuilder(previewImagePath)],
+        components: [row],
+        ephemeral: true,
+      });
 
-        const collector = reply.createMessageComponentCollector({
-          ComponentType: ComponentType.Button,
-        });
+      const collector = reply.createMessageComponentCollector({
+        ComponentType: ComponentType.Button,
+      });
 
-        collector.on("collect", async (interaction) => {
-          if (interaction.customId === "top_left") {
-            const topLeftPath = await saveBase64Image(topLeftImage);
-            interaction.reply({
-              files: [new AttachmentBuilder(topLeftPath)],
-            });
-            return;
-          }
-          if (interaction.customId === "top_right") {
-            const topRightPath = await saveBase64Image(topRightImage);
-            interaction.reply({
-              files: [new AttachmentBuilder(topRightPath)],
-            });
-            return;
-          }
-          if (interaction.customId === "bottom_left") {
-            const bottomLeftPath = await saveBase64Image(bottomLeftImage);
-            interaction.reply({
-              files: [new AttachmentBuilder(bottomLeftPath)],
-            });
-            return;
-          }
-          if (interaction.customId === "bottom_right") {
-            const bottomRightPath = await saveBase64Image(bottomRightImage);
-            interaction.reply({
-              files: [new AttachmentBuilder(bottomRightPath)],
-            });
-            return;
-          }
-          if (interaction.customId === "regenerate") {
-            // do nothing since we are in a while loop that will only terminate
-            // when the user makes a selection
-            //
-            // interaction.deferReply({ ephemeral: true });
-            // await query({
-            //   inputs: interaction.options.getString("prompt"),
-            //   num_images: 4,
-            //   rows: 2,
-            //   cols: 2,
-            // }).then((response) => {
-            //   const { images, preview } = response;
-            //   previewImage = preview;
-            //   topLeftImage = images[0];
-            //   topRightImage = images[1];
-            //   bottomLeftImage = images[2];
-            //   bottomRightImage = images[3];
-            // });
-            // const previewImagePath = await saveBase64Image(previewImage);
-            // const reply = await interaction.editReply({
-            //   files: [new AttachmentBuilder(previewImagePath)],
-            //   components: [row],
-            //   ephemeral: true,
-            // });
-            // const collector = reply.createMessageComponentCollector({
-            //   ComponentType: ComponentType.Button,
-            // });
-          }
-        });
-      }
+      collector.on("collect", async (interaction) => {
+        if (interaction.customId === "top_left") {
+          const topLeftPath = await saveBase64Image(topLeftImage);
+          interaction.reply({
+            files: [new AttachmentBuilder(topLeftPath)],
+          });
+          return;
+        }
+        if (interaction.customId === "top_right") {
+          const topRightPath = await saveBase64Image(topRightImage);
+          interaction.reply({
+            files: [new AttachmentBuilder(topRightPath)],
+          });
+          return;
+        }
+        if (interaction.customId === "bottom_left") {
+          const bottomLeftPath = await saveBase64Image(bottomLeftImage);
+          interaction.reply({
+            files: [new AttachmentBuilder(bottomLeftPath)],
+          });
+          return;
+        }
+        if (interaction.customId === "bottom_right") {
+          const bottomRightPath = await saveBase64Image(bottomRightImage);
+          interaction.reply({
+            files: [new AttachmentBuilder(bottomRightPath)],
+          });
+          return;
+        }
+        if (interaction.customId === "regenerate") {
+          // TODO:
+          // interaction.deferReply({ ephemeral: true });
+          // await query({
+          //   inputs: interaction.options.getString("prompt"),
+          //   num_images: 4,
+          //   rows: 2,
+          //   cols: 2,
+          // }).then((response) => {
+          //   const { images, preview } = response;
+          //   previewImage = preview;
+          //   topLeftImage = images[0];
+          //   topRightImage = images[1];
+          //   bottomLeftImage = images[2];
+          //   bottomRightImage = images[3];
+          // });
+          // const previewImagePath = await saveBase64Image(previewImage);
+          // const reply = await interaction.editReply({
+          //   files: [new AttachmentBuilder(previewImagePath)],
+          //   components: [row],
+          //   ephemeral: true,
+          // });
+          // const collector = reply.createMessageComponentCollector({
+          //   ComponentType: ComponentType.Button,
+          // });
+
+          return;
+        }
+      });
     } catch (error) {
       await interaction.editReply("/(✖ ᗝ ✖)/ sorry something went wrong");
       console.error(`Failed to generate stickers: ${error}`);
