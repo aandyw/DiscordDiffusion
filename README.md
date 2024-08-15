@@ -88,6 +88,7 @@ which will build the appropriate image for deployment.
 - [x] Setup inference endpoint for SDXL-base-1.0 lightning
 - [x] Integrate discord bot with inference endpoint
 - [x] Deployment with fly.io
+- [ ] Regenerate sticker functionality
 - [ ] Experiment with segmentation (SAM) to remove sticker backgrounds
 - [ ] Experiment with other LCM models to reduce latency and increase quality
 - [ ] Finetuning diffusion models with KohyaSS
